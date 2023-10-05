@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Verifica Stato Spedizione</h5>
+                <p class="card-text">Controlla lo stato della tua spedizione inserendo il codice.</p>
+                <a href="@Url.Action("VerificaStato", "Spedizioni")" class="btn btn-primary">Verifica</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Registrati</h5>
+                <p class="card-text">Non hai un account? Registrati ora!</p>
+                <a href="@Url.Action("UserRegistration", "Registration")" class="btn btn-primary">Registrati</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Login</h5>
+                <p class="card-text">Hai già un account? Accedi ora!</p>
+                <a href="@Url.Action("Login", "Registration")" class="btn btn-primary">Login</a>
+            </div>
+        </div>
+    </div>
+</div>
+

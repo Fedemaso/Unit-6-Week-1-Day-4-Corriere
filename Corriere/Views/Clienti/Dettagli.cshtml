@@ -1,0 +1,27 @@
+﻿@model Corriere.Models.Cliente
+
+@{
+    ViewBag.Title = "Dettagli Cliente";
+}
+
+<h2>Dettagli Cliente</h2>
+
+<dl class="dl-horizontal">
+    <dt>Nome:</dt>
+    <dd>@Model.Nome</dd>
+
+    <dt>Cognome:</dt>
+    <dd>@Model.Cognome</dd>
+
+    <dt>Codice Fiscale:</dt>
+    <dd>@Model.CodiceFiscale</dd>
+
+    <dt>Partita IVA:</dt>
+    <dd>@Model.PartitaIVA</dd>
+</dl>
+
+<p>
+    @Html.ActionLink("Torna all'elenco", "Index") |
+    @Html.ActionLink("Modifica", "ModificaCliente", new { id = Model.ClienteID }) |
+    
+</p>

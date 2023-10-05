@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Spedizioni Per Citta";
+}
+@model Corriere.Models.Spedizione
+
+
+<h2>Spedizioni Per Citta</h2>
+
+<table class="table" id="spedizioniPerCittaTable">
+    <thead>
+        <tr>
+            <th>Città Destinataria</th>
+            <th>Numero di Spedizioni</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '@Url.Action("SpedizioniPerCitta", "Spedizioni")',
+                method: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    var tableContent = '';
+                    $.each(data, function (index, spedizionePerCitta) {
+                        tableContent += '<tr>';
+                        tableContent += '<td>' + spedizionePerCitta.CittaDestinataria + '</td>';
+                        tableContent += '<td>' + spedizionePerCitta.NumeroSpedizioni + '</td>';
+                        tableContent += '</tr>';
+                    });
+                    $('#spedizioniPerCittaTable tbody').html(tableContent);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+    </script>
+}

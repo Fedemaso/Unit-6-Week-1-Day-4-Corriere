@@ -1,0 +1,46 @@
+﻿
+@model Corriere.Models.Spedizione
+
+@{
+    ViewBag.Title = "Dettagli Spedizione";
+}
+
+<h2>Dettagli Spedizione</h2>
+
+<div>
+    <h4>Spedizione</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.NumeroSpedizione)</dt>
+        <dd>@Html.DisplayFor(model => model.NumeroSpedizione)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.DataSpedizione)</dt>
+        <dd>@Html.DisplayFor(model => model.DataSpedizione)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Peso)</dt>
+        <dd>@Html.DisplayFor(model => model.Peso)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.CittaDestinataria)</dt>
+        <dd>@Html.DisplayFor(model => model.CittaDestinataria)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.IndirizzoDestinatario)</dt>
+        <dd>@Html.DisplayFor(model => model.IndirizzoDestinatario)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.NominativoDestinatario)</dt>
+        <dd>@Html.DisplayFor(model => model.NominativoDestinatario)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Costo)</dt>
+        <dd>@Html.DisplayFor(model => model.Costo)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.DataConsegnaPrevista)</dt>
+        <dd>@Html.DisplayFor(model => model.DataConsegnaPrevista)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Stato)</dt>
+        <dd>@Html.DisplayFor(model => model.Stato)</dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Modifica", "ModificaSpedizione", new { id = Model.SpedizioneID }, new { @class = "btn btn-primary" })
+
+    @Html.ActionLink("Torna alla lista", "Index")
+</p>

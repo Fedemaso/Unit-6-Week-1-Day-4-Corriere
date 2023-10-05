@@ -1,0 +1,128 @@
+﻿@model Corriere.Models.Spedizione
+
+@{
+    ViewBag.Title = "Modifica Spedizione";
+}
+
+<h2>Modifica Spedizione</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Dettagli Spedizione</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.SpedizioneID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ClienteID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ClienteID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ClienteID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NumeroSpedizione, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NumeroSpedizione, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NumeroSpedizione, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="DataSpedizione">Data Spedizione</label>
+            <input type="text" class="form-control" id="dataSpedizione" name="DataSpedizione" value="@Model.DataSpedizione.ToString("yyyy-MM-dd")" />
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Peso, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Peso, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Peso, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CittaDestinataria, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CittaDestinataria, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CittaDestinataria, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IndirizzoDestinatario, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IndirizzoDestinatario, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IndirizzoDestinatario, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NominativoDestinatario, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NominativoDestinatario, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NominativoDestinatario, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Costo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Costo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Costo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="DataConsegnaPrevista">Data Consegna Prevista</label>
+            <input type="text" class="form-control" id="dataConsegnaPrevista" name="DataConsegnaPrevista" value="@Model.DataConsegnaPrevista.ToString("yyyy-MM-dd")" />
+        </div>
+
+
+        <div class="form-group">
+            <label for="Stato">Stato</label>
+            <select class="form-control" id="Stato" name="Stato">
+                @foreach (var stato in ViewBag.StatiPossibili)
+                {
+                    <option value="@stato" @(Model.Stato == stato ? "selected" : "")>@stato</option>
+                }
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Salva" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Torna all'elenco", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <script>
+        flatpickr("#dataSpedizione", {
+            dateFormat: "Y-m-d",
+        });
+
+        flatpickr("#dataConsegnaPrevista", {
+            dateFormat: "Y-m-d",
+        });
+        </script>
+    }

@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Ufficio Pacchi </title>
+
+    @Scripts.Render("~/bundles/modernizr")
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Corriere</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Verifica Stato", "VerificaStato", "Spedizioni", new { area = "" }, new { @class = "nav-link" })
+                </li>
+
+
+                @if (Request.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        @Html.ActionLink("Spedizioni", "Index", "Spedizioni", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Clienti", "Index", "Clienti", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            Queries
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="@Url.Action("SpedizioniInConsegna", "Spedizioni")">Spedizioni in Consegna Oggi</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("SpedizioniInAttesaView", "Spedizioni")">Spedizioni in Attesa</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("SpedizioniPerCittaView", "Spedizioni")">Spedizioni per Città Destinataria</a></li>
+                        </ul>
+
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Logout", "Logout", "Registration", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                }
+
+            </ul>
+        </div>
+        
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Ufficio Pacchi</p>
+        </footer>
+    </div>
+
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+   
+    @RenderSection("scripts", required: false)
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    
+
+</body>
+</html>

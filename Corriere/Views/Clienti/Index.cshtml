@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Corriere.Models.Cliente>
+
+@{
+    ViewBag.Title = "Elenco Clienti";
+}
+
+<h2>Elenco dei Clienti</h2>
+
+<p>
+    @Html.ActionLink("Nuovo Cliente", "NuovoCliente")
+</p>
+
+<table class="table">
+    <tr>
+        <th>Nome</th>
+        <th>Cognome</th>
+        <th>Codice Fiscale</th>
+        <th>Partita IVA</th>
+        <th></th>
+    </tr>
+
+    @foreach (var cliente in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => cliente.Nome)</td>
+            <td>@Html.DisplayFor(modelItem => cliente.Cognome)</td>
+            <td>@Html.DisplayFor(modelItem => cliente.CodiceFiscale)</td>
+            <td>@Html.DisplayFor(modelItem => cliente.PartitaIVA)</td>
+            <td>
+                @Html.ActionLink("Dettagli", "Dettagli", new { id = cliente.ClienteID }) |
+                @Html.ActionLink("Modifica", "ModificaCliente", new { id = cliente.ClienteID }) |
+                <form action="@Url.Action("EliminaCliente", "Clienti")" method="post" data-cliente-id="@cliente.ClienteID" class="formEliminaCliente">
+                    <input type="hidden" name="id" value="@cliente.ClienteID" />
+                    <input type="submit" value="Elimina" />
+                </form>
+
+
+            </td>
+        </tr>
+    }
+</table>
+@section scripts {
+    <script>
+        $(document).on('submit', '.formEliminaCliente', function(e) {
+            var form = $(this);
+            var clienteId = form.data('cliente-id');
+
+            
+            if (form.data('confirmed')) {
+                return true;
+            }
+
+            e.preventDefault();
+
+            $.ajax({
+                url: '@Url.Action("HaSpedizioniAttive", "Clienti")',
+                data: { clienteId: clienteId },
+                method: 'GET',
+                success: function(data) {
+                    if (data) {
+                        alert("Il cliente ha spedizioni attive, gestire prima le spedizioni e poi eliminare il cliente");
+                    } else {
+                        if (confirm('Sei sicuro di voler eliminare questo cliente?')) {
+                            form.data('confirmed', true).submit();
+                        }
+                    }
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+    </script>
+}
+

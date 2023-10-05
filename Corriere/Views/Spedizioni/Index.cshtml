@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Corriere.Models.SpedizioneConCliente>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Elenco delle spedizioni</h2>
+
+<p>
+    @Html.ActionLink("Nuova Spedizione", "NuovaSpedizione")
+</p>
+
+<table class="table">
+    <tr>
+        <th>Numero Spedizione</th>
+        <th>Nome Cliente</th>
+        <th>Data Spedizione</th>
+        <th>Peso</th>
+        <th>Città Destinataria</th>
+        <th>Indirizzo Destinatario</th>
+        <th>Nominativo Destinatario</th>
+        <th>Costo</th>
+        <th>Data Consegna Prevista</th>
+        <th>Stato</th>
+
+
+        
+
+</tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.NumeroSpedizione)</td>
+            <td>@Html.DisplayFor(modelItem => item.NomeCliente)</td>
+            <td>@Html.DisplayFor(modelItem => item.DataSpedizioneFormatted)</td>
+            <td>@Html.DisplayFor(modelItem => item.Peso)</td>
+            <td>@Html.DisplayFor(modelItem => item.CittaDestinataria)</td>
+            <td>@Html.DisplayFor(modelItem => item.IndirizzoDestinatario)</td>
+            <td>@Html.DisplayFor(modelItem => item.NominativoDestinatario)</td>
+            <td>@Html.DisplayFor(modelItem => item.Costo)</td>
+            <td>@Html.DisplayFor(modelItem => item.DataConsegnaPrevistaFormatted)</td>
+            <td>@Html.DisplayFor(modelItem => item.Stato)</td>
+            <td>
+                @Html.ActionLink("Dettagli", "Dettagli", new { id = item.SpedizioneID }) |
+                @Html.ActionLink("Aggiorna", "AggiornaStatoSpedizione", new { id = item.SpedizioneID }) |
+                <form action="@Url.Action("Elimina", "Spedizioni")" method="post" onsubmit="return confirm('Sei sicuro di voler eliminare questa spedizione?');" style="display:inline;">
+                    <input type="hidden" name="id" value="@item.SpedizioneID" />
+                    <input type="submit" value="Elimina" />
+                </form>
+
+            </td>
+        </tr>
+    }
+</table>
