@@ -32,7 +32,7 @@ namespace Corriere.Controllers
                 User user = new User
                 {
                     Nickname = model.Nickname,
-                    Password = model.Password,  // Semplice password senza hashing, lo so che non va fatto ;(
+                    Password = model.Password,  // Semplice password senza hashing, lo so che non va fatto ma mi dava troppi errori e non avevo più tempo ;(
                     Role = "User"
                 };
 
